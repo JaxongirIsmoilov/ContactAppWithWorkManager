@@ -13,7 +13,8 @@ interface UpdateContract {
 
     data class UiState(
         val isSuccess: Boolean = false,
-        val name: String = "",
+        val firstName: String = "",
+        val lastName : String = "" ,
         val phone: String = "",
         var contactData: List<ContactParam> = emptyList()
     )
@@ -22,13 +23,21 @@ interface UpdateContract {
         object Back : Intent
         object EditContact : Intent
 
+        data class PutOldData(
+            val contactParam: ContactParam
+        ) : Intent
         data class ChangingName(
             val name: String
+        ) : Intent
+
+        data class ChangingLastName(
+            val lastName: String
         ) : Intent
 
         data class ChangingPhone(
             val phone: String
         ) : Intent
+
     }
 
     interface SideEffect {
@@ -37,7 +46,5 @@ interface UpdateContract {
         ) : SideEffect
     }
 
-    interface EditDirection {
-        suspend fun backMainScreen()
-    }
+
 }

@@ -29,7 +29,6 @@ class AddViewModel @Inject constructor(
                             false
                         )
                     )
-
                     direction.back()
 
                 }

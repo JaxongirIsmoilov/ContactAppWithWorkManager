@@ -2,7 +2,7 @@ package uz.gita.jaxongir.contactappwithworkmanager.presentation.source.home
 
 import uz.gita.jaxongir.contactappwithworkmanager.domain.params.ContactParam
 import uz.gita.jaxongir.contactappwithworkmanager.presentation.source.add.AddScreen
-import uz.gita.jaxongir.contactappwithworkmanager.presentation.source.edit.EditScreen
+import uz.gita.jaxongir.contactappwithworkmanager.presentation.source.update.UpdateScreen
 import uz.gita.jaxongir.contactappwithworkmanager.ui.navigator.AppNavigator
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -21,7 +21,7 @@ class HomeDirectionImpl @Inject constructor(
     }
 
     override suspend fun moveToEditScreen(contactData: ContactParam) {
-        appNavigator.navigateTo(EditScreen(contactData))
+        appNavigator.navigateTo(UpdateScreen(contactData))
     }
 
 }

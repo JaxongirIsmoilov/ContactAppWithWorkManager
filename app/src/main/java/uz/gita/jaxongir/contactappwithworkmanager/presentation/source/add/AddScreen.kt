@@ -149,7 +149,13 @@ fun AddScreenComponent(
         )
 
         OutlinedButton(
-            onClick = { },
+            onClick = {
+                onEventDispatcher(AddContract.Intent.ClickAddButton(
+                    firstName ,
+                    lastName,
+                    phone
+                ))
+            },
             shape = CircleShape,
             border = BorderStroke(1.dp, Color.Cyan),
             modifier = Modifier

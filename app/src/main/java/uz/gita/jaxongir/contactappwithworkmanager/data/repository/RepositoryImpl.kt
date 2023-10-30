@@ -5,6 +5,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import uz.gita.jaxongir.contactappwithworkmanager.data.mappers.toEntity
@@ -19,24 +21,27 @@ class RepositoryImpl @Inject constructor(private val dao: ContactDao) : Reposito
     private val scope = CoroutineScope(Dispatchers.IO + Job())
 
     override fun update(contactParam: ContactParam) {
-        dao.update(contactParam.toEntity())
+        scope.launch {
+            dao.update(contactParam.toEntity())
+        }
     }
 
     override fun addContact(contactParam: ContactParam) {
-        dao.addContact(contactParam.toEntity())
+        scope.launch {
+            dao.addContact(contactParam.toEntity())
+        }
     }
 
     override fun saveAllData() {
 
     }
 
-    override fun getAllContactData(): Flow<List<ContactParam>> = callbackFlow{
-        trySend(
-            dao.getAllContactData().map {
-                it.toParamData()
-            }
-        )
+    override fun getAllContactData(): Flow<List<ContactParam>> = flow{
+        emit(dao.getAllContactData().map {
+            it.toParamData()
+        })
     }
+        .flowOn(Dispatchers.IO)
 
     override  fun deleteContact(contactParam: ContactParam)  {
         scope.launch {

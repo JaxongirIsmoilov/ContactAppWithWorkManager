@@ -31,7 +31,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ContactAppWithWorkManagerTheme {
                Navigator(HomeScreen()) { navigator ->
                    navigationHandler.navigationFlow
                        .onEach {
@@ -41,6 +40,6 @@ class MainActivity : ComponentActivity() {
                }
 
             }
-        }
+
     }
 }

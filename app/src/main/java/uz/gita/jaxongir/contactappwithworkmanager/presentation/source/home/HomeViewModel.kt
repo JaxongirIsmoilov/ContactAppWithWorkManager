@@ -17,18 +17,18 @@ class HomeViewModel @Inject constructor(
     private val getAllContactDataUseCase: GetAllContactDataUseCase,
     private val deleteUseCase: DeleteUseCase
 
-) : ViewModel(), HomeScreenContract.ViewModel {
-    override val uiState = MutableStateFlow(HomeScreenContract.UIState())
+) : ViewModel(), HomeContract.ViewModel {
+    override val uiState = MutableStateFlow(HomeContract.UIState())
 
-    override fun onEventDispatcher(intent: HomeScreenContract.Intent) {
+    override fun onEventDispatcher(intent: HomeContract.Intent) {
         when (intent) {
-            HomeScreenContract.Intent.ClickAddButton -> {
+            HomeContract.Intent.ClickAddButton -> {
                 viewModelScope.launch {
                     direction.moveToAddScreen()
                 }
             }
 
-            HomeScreenContract.Intent.UpdateData -> {
+            HomeContract.Intent.UpdateData -> {
                 viewModelScope.launch {
                     getAllContactDataUseCase.invoke().onEach {list ->
                         reduce { it.copy(list =list ) }
@@ -37,19 +37,19 @@ class HomeViewModel @Inject constructor(
                 }
             }
 
-            is HomeScreenContract.Intent.ClickEditButton -> {
+            is HomeContract.Intent.ClickEditButton -> {
                 viewModelScope.launch {
                     direction.moveToEditScreen(intent.data)
                 }
             }
 
-            is HomeScreenContract.Intent.ClickDeleteButton -> {
+            is HomeContract.Intent.ClickDeleteButton -> {
                 deleteUseCase.invoke(intent.data)
             }
         }
     }
 
-    private fun reduce(block: (HomeScreenContract.UIState) -> HomeScreenContract.UIState) {
+    private fun reduce(block: (HomeContract.UIState) -> HomeContract.UIState) {
         val oldValue = uiState.value
         uiState.value = block(oldValue)
     }

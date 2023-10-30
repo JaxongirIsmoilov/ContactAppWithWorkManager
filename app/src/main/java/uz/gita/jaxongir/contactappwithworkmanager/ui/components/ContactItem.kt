@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -34,6 +35,7 @@ fun Contact_item(
 ) {
     Card(
         modifier = Modifier
+            .padding(horizontal = 10.dp)
             .fillMaxWidth()
             .height(70.dp)
             .combinedClickable(
@@ -52,24 +54,26 @@ fun Contact_item(
                 contentDescription = null,
                 modifier = Modifier
                     .align(Alignment.CenterStart)
-                    .size(40.dp)
+                    .size(40.dp) ,
+                colorFilter = ColorFilter.tint(Color.White)
             )
 
             Row(
                 modifier = Modifier
                     .align(Alignment.TopStart)
-                    .padding(start = 45.dp, top = 5.dp)
+                    .padding(start = 55.dp, top = 5.dp)
             ) {
 
                 Text(
                     text = contactParam.firstName,
                     fontSize = 18.sp,
-
+                    color = Color.White
                     )
                 Text(
                     text = contactParam.lastName,
                     fontSize = 18.sp,
-                    modifier = Modifier.padding(start = 15.dp)
+                    modifier = Modifier.padding(start = 15.dp) ,
+                    color = Color.White
                 )
             }
 
@@ -80,7 +84,8 @@ fun Contact_item(
                 fontSize = 14.sp,
                 modifier = Modifier
                     .align(Alignment.BottomStart)
-                    .padding(start = 45.dp, bottom = 5.dp)
+                    .padding(start = 55.dp, bottom = 5.dp) ,
+                color = Color.White
             )
 
             Image(
@@ -95,7 +100,8 @@ fun Contact_item(
                 modifier = Modifier
                     .align(Alignment.CenterEnd)
                     .padding(end = 10.dp)
-                    .size(20.dp)
+                    .size(20.dp) ,
+                colorFilter = ColorFilter.tint(Color.White)
             )
 
         }
