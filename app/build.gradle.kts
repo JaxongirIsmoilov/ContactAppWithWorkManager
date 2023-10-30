@@ -119,4 +119,18 @@ dependencies {
     //Timber
     implementation ("com.jakewharton.timber:timber:5.0.1")
 
+    /**
+     * REST API: Adding retrofit to the mainLayer
+     */
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2")
+
+    /**
+     *  Chuck
+     */
+    debugImplementation ("com.github.chuckerteam.chucker:library:3.5.2")
+    releaseImplementation ("com.github.chuckerteam.chucker:library-no-op:3.5.2")
+
 }
