@@ -10,7 +10,7 @@ interface HomeScreenContract {
         fun onEventDispatcher (intent : Intent)
     }
 
-    data class UIState(val list: List<ContactParam>)
+    data class UIState(val list: List<ContactParam> = emptyList())
 
     interface Intent {
         object ClickAddButton :Intent
