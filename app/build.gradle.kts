@@ -116,4 +116,7 @@ dependencies {
     val work_version = "2.8.1"
     implementation("androidx.work:work-runtime-ktx:$work_version")
 
+    //Timber
+    implementation ("com.jakewharton.timber:timber:5.0.1")
+
 }
