@@ -14,6 +14,12 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,14 +30,38 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.androidx.AndroidScreen
+import cafe.adriel.voyager.hilt.getViewModel
 import uz.gita.jaxongir.contactappwithworkmanager.domain.params.ContactParam
 import uz.gita.jaxongir.contactappwithworkmanager.ui.theme.ContactAppWithWorkManagerTheme
 import uz.gita.jaxongir.contactappwithworkmanager.utils.MaskVisualTransformation
 
 
+class UpdateScreen(val contactParam: ContactParam) : AndroidScreen() {
+    @Composable
+    override fun Content() {
+        val viewModel: UpdateContract.EditViewModel = getViewModel<UpdateViewModel>()
+
+        viewModel.onEventDispatcher(UpdateContract.Intent.ChangingName(contactParam.name))
+        viewModel.onEventDispatcher(UpdateContract.Intent.ChangingPhone(contactParam.phone))
+
+        UpdateScreenContent(
+            contactParam,
+            viewModel.uiState.collectAsState(),
+            viewModel::onEventDispatcher
+        )
+    }
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Edit_Screen(contactParam: ContactParam) {
+fun UpdateScreenContent(
+    contactParam: ContactParam,
+    uiState: State<UpdateContract.UiState>,
+    onEventDispatcher: (UpdateContract.Intent) -> Unit
+) {
+
+    var phone by remember { mutableStateOf(contactParam.phone) }
 
 
     Column(modifier = Modifier.fillMaxSize()) {
@@ -44,11 +74,13 @@ fun Edit_Screen(contactParam: ContactParam) {
         )
 
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            value = uiState.value.name,
+            onValueChange = {
+                onEventDispatcher(UpdateContract.Intent.ChangingName(it))
+            },
             placeholder = {
                 Text(
-                    text = "Name",
+                    text = contactParam.name,
                     style = TextStyle(
                         color = Color.LightGray,
                         fontWeight = FontWeight.W700
@@ -70,11 +102,13 @@ fun Edit_Screen(contactParam: ContactParam) {
         )
 
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            value = uiState.value.phone,
+            onValueChange = {
+                onEventDispatcher(UpdateContract.Intent.ChangingPhone(it))
+            },
             placeholder = {
                 Text(
-                    text = "+998-##-###-##-##",
+                    text = contactParam.phone,
                     style = TextStyle(
                         color = Color.LightGray,
                         fontWeight = FontWeight.W700
@@ -97,7 +131,11 @@ fun Edit_Screen(contactParam: ContactParam) {
         )
 
         OutlinedButton(
-            onClick = { },
+            onClick = {
+                onEventDispatcher.invoke(
+                    UpdateContract.Intent.EditContact
+                )
+            },
             shape = CircleShape,
             border = BorderStroke(1.dp, Color.Cyan),
             modifier = Modifier
@@ -115,6 +153,6 @@ fun Edit_Screen(contactParam: ContactParam) {
 @Composable
 fun EditScreenPreview() {
     ContactAppWithWorkManagerTheme {
-        Edit_Screen()
+        UpdateScreen(ContactParam(1, "sdfg", "491651894"))
     }
 }

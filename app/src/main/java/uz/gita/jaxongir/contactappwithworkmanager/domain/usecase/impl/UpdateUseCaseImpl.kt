@@ -8,7 +8,7 @@ import uz.gita.jaxongir.contactappwithworkmanager.domain.usecase.UpdateUseCase
 import javax.inject.Inject
 
 class UpdateUseCaseImpl @Inject constructor(private val repository: Repository) : UpdateUseCase {
-    override suspend fun updateContact(contactParam: ContactParam) {
+    override fun invoke(contactParam: ContactParam) {
             repository.update(contactParam)
     }
 

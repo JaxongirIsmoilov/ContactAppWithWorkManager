@@ -5,7 +5,7 @@ import uz.gita.jaxongir.contactappwithworkmanager.data.source.local.room.entity.
 import uz.gita.jaxongir.contactappwithworkmanager.domain.params.ContactParam
 
 interface Repository {
-    suspend fun update(contactParam: ContactParam)
+    fun update(contactParam: ContactParam)
     fun saveAllData()
     fun getAllContactData() : Flow<List<ContactParam>>
 

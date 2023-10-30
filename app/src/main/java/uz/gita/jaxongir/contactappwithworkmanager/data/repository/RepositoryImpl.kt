@@ -16,13 +16,10 @@ import uz.gita.jaxongir.contactappwithworkmanager.domain.repository.Repository
 import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(private val dao: ContactDao) : Repository {
-
     private val scope = CoroutineScope(Dispatchers.IO + Job())
 
-    override suspend fun update(contactParam: ContactParam) {
-        withContext(Dispatchers.IO) {
-            dao.update(contactParam.toEntity())
-        }
+    override fun update(contactParam: ContactParam) {
+        dao.update(contactParam.toEntity())
     }
 
     override fun saveAllData() {
