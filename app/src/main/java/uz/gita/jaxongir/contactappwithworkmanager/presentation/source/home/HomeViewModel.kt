@@ -18,7 +18,19 @@ class HomeViewModel @Inject constructor(
     private val deleteUseCase: DeleteUseCase
 
 ) : ViewModel(), HomeContract.ViewModel {
+
     override val uiState = MutableStateFlow(HomeContract.UIState())
+
+    private fun loadData() {
+        viewModelScope.launch {
+            getAllContactDataUseCase.invoke()
+                .onEach {list ->
+                    reduce { it.copy(list =list )
+                    }
+                }
+                .launchIn(viewModelScope)
+        }
+    }
 
     override fun onEventDispatcher(intent: HomeContract.Intent) {
         when (intent) {
@@ -29,12 +41,7 @@ class HomeViewModel @Inject constructor(
             }
 
             HomeContract.Intent.UpdateData -> {
-                viewModelScope.launch {
-                    getAllContactDataUseCase.invoke().onEach {list ->
-                        reduce { it.copy(list =list ) }
-                    }
-                        .launchIn(viewModelScope)
-                }
+                loadData()
             }
 
             is HomeContract.Intent.ClickEditButton -> {
@@ -45,6 +52,7 @@ class HomeViewModel @Inject constructor(
 
             is HomeContract.Intent.ClickDeleteButton -> {
                 deleteUseCase.invoke(intent.data)
+                loadData()
             }
         }
     }

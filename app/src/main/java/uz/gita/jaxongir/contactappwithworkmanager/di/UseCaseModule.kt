@@ -30,7 +30,7 @@ interface UseCaseModule {
     fun bindDeleteContactUseCase(impl: DeleteUseCaseImpl): DeleteUseCase
 
     @[Binds Singleton]
-    fun bindSaveAllDataUseCase(impl: SaveAllDataUseCaseImpl): SaveAllDataUseCase
+    fun bindSaveAllDataUseCase(impl : SaveAllDataUseCaseImpl) : SaveAllDataUseCase
 
     @[Binds Singleton]
     fun bindsAddUseCase(impl : AddContactUseCaseImpl) : AddUseCase

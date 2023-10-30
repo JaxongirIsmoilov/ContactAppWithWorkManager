@@ -1,6 +1,8 @@
 package uz.gita.jaxongir.contactappwithworkmanager.presentation.source.home
 
 import android.annotation.SuppressLint
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -24,19 +26,31 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import cafe.adriel.voyager.androidx.AndroidScreen
 import cafe.adriel.voyager.hilt.getViewModel
 import uz.gita.jaxongir.contactappwithworkmanager.R
 import uz.gita.jaxongir.contactappwithworkmanager.presentation.source.update.UpdateContract
 import uz.gita.jaxongir.contactappwithworkmanager.ui.components.Contact_item
+import uz.gita.jaxongir.contactappwithworkmanager.ui.workManager.ContactWorker
+import java.time.Duration
 
 class HomeScreen : AndroidScreen() {
+    @RequiresApi(Build.VERSION_CODES.O)
     @Composable
     override fun Content() {
+        val workRequest = OneTimeWorkRequestBuilder<ContactWorker>()
+            .setInitialDelay(Duration.ofSeconds(10))
+            .build()
+
+        WorkManager.getInstance(LocalContext.current).enqueue(workRequest)
+
         val viewModel = getViewModel<HomeViewModel>()
         viewModel.onEventDispatcher(HomeContract.Intent.UpdateData)
         HomeScreenContent(viewModel.uiState.collectAsState(), viewModel::onEventDispatcher)

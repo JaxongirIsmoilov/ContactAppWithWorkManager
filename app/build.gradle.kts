@@ -93,6 +93,13 @@ dependencies {
     implementation ("com.google.dagger:hilt-android:$hilt_version")
     kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
 
+    // Hilt worker
+    implementation("androidx.hilt:hilt-work:1.0.0")
+    // When using Kotlin.
+    kapt("androidx.hilt:hilt-compiler:1.0.0")
+    // When using Java.
+    annotationProcessor("androidx.hilt:hilt-compiler:1.0.0")
+
     // firebase
     implementation(platform("com.google.firebase:firebase-bom:32.4.0"))
     implementation("com.google.firebase:firebase-analytics-ktx")
