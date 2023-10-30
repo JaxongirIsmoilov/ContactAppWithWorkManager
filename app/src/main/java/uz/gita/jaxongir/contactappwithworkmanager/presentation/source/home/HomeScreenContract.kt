@@ -14,7 +14,7 @@ interface HomeScreenContract {
 
     interface Intent {
         object ClickAddButton :Intent
-        data class ClickDeleteButton(val id: String):Intent
+        data class ClickDeleteButton(val data: ContactParam):Intent
         data class ClickEditButton(val data: ContactParam):Intent
         object UpdateData :Intent
     }
