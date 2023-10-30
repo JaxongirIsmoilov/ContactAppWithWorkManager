@@ -6,6 +6,7 @@ import uz.gita.jaxongir.contactappwithworkmanager.domain.params.ContactParam
 
 interface Repository {
     fun update(contactParam: ContactParam)
+    fun addContact(contactParam: ContactParam)
     fun saveAllData()
     fun getAllContactData() : Flow<List<ContactParam>>
 

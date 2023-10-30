@@ -5,11 +5,11 @@ import uz.gita.jaxongir.contactappwithworkmanager.domain.params.ContactParam
 
 fun ContactEntity.toParamData(): ContactParam =
     ContactParam(
-        id, name, phone
+        id, firstName, lastName, phone, state
     )
 
 
 fun ContactParam.toEntity(): ContactEntity =
     ContactEntity(
-        id, name, phone
+        id, firstName, lastName, phone, state
     )

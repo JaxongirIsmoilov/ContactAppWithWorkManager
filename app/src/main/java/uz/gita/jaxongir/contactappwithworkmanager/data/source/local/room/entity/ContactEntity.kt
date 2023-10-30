@@ -1,5 +1,6 @@
 package uz.gita.jaxongir.contactappwithworkmanager.data.source.local.room.entity
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -7,6 +8,10 @@ import androidx.room.PrimaryKey
 data class ContactEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val name: String,
-    val phone: String
+    @ColumnInfo(name = "first_name")
+    val firstName : String,
+    @ColumnInfo("last_name")
+    val lastName: String,
+    val phone: String,
+    val state : Boolean
 )

@@ -22,6 +22,10 @@ class RepositoryImpl @Inject constructor(private val dao: ContactDao) : Reposito
         dao.update(contactParam.toEntity())
     }
 
+    override fun addContact(contactParam: ContactParam) {
+        dao.addContact(contactParam.toEntity())
+    }
+
     override fun saveAllData() {
 
     }
