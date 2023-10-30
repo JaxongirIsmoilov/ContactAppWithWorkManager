@@ -1,6 +1,7 @@
 package uz.gita.jaxongir.contactappwithworkmanager.presentation.source.home
 
 import kotlinx.coroutines.flow.StateFlow
+import uz.gita.jaxongir.contactappwithworkmanager.domain.params.ContactParam
 
 interface HomeScreenContract {
 
