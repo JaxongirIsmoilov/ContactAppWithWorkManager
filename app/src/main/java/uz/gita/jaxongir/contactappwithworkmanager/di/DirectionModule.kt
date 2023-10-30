@@ -4,6 +4,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import uz.gita.jaxongir.contactappwithworkmanager.presentation.source.add.AddDirection
+import uz.gita.jaxongir.contactappwithworkmanager.presentation.source.add.AddDirectionImpl
 import uz.gita.jaxongir.contactappwithworkmanager.presentation.source.home.HomeDirection
 import uz.gita.jaxongir.contactappwithworkmanager.presentation.source.home.HomeDirectionImpl
 
@@ -14,4 +16,7 @@ interface DirectionModule {
 
     @Binds
     fun bindsHomeScreenDirection(impl: HomeDirectionImpl): HomeDirection
+
+    @Binds
+    fun bindsAddDirection(impl: AddDirectionImpl) : AddDirection
 }
