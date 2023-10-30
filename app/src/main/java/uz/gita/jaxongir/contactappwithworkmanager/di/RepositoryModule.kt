@@ -5,7 +5,7 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import uz.gita.jaxongir.contactappwithworkmanager.domain.repository.Repository
-import uz.gita.jaxongir.contactappwithworkmanager.domain.repository.impl.RepositoryImpl
+import uz.gita.jaxongir.contactappwithworkmanager.data.repository.RepositoryImpl
 import javax.inject.Singleton
 
 @Module
