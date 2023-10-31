@@ -29,7 +29,7 @@ class ContactApiModule {
         Retrofit.Builder()
             .client(okHttp)
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("https://638a-195-158-16-140.ngrok.io/api/v1/")
+            .baseUrl("https://bb2d-195-158-16-140.ngrok-free.app/api/v1/")
             .build()
 
     @[Provides Singleton]
