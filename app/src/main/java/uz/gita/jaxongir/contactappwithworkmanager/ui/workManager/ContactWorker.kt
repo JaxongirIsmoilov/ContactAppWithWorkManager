@@ -10,7 +10,7 @@ import uz.gita.jaxongir.contactappwithworkmanager.domain.usecase.SaveAllDataUseC
 
 @HiltWorker
 class ContactWorker @AssistedInject constructor(
-    @Assisted private val saveAllDataUseCase: SaveAllDataUseCase ,
+    private val saveAllDataUseCase: SaveAllDataUseCase ,
     @Assisted context : Context ,
     @Assisted workerParameters: WorkerParameters
 ) : Worker(context , workerParameters){

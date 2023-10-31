@@ -45,11 +45,6 @@ class HomeScreen : AndroidScreen() {
     @RequiresApi(Build.VERSION_CODES.O)
     @Composable
     override fun Content() {
-        val workRequest = OneTimeWorkRequestBuilder<ContactWorker>()
-            .setInitialDelay(Duration.ofSeconds(10))
-            .build()
-
-        WorkManager.getInstance(LocalContext.current).enqueue(workRequest)
 
         val viewModel = getViewModel<HomeViewModel>()
         viewModel.onEventDispatcher(HomeContract.Intent.UpdateData)
@@ -83,7 +78,10 @@ fun HomeScreenContent(
                 contentDescription = null,
                 modifier = Modifier
                     .align(Alignment.CenterEnd)
-                    .padding(end = 10.dp) ,
+                    .padding(end = 10.dp)
+                    .clickable {
+                        onEventDispatcher(HomeContract.Intent.ClickSetting)
+                    },
                 colorFilter = ColorFilter.tint(Color.White)
             )
 

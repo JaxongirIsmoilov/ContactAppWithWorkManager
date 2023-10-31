@@ -3,6 +3,7 @@ package uz.gita.jaxongir.contactappwithworkmanager.app
 import android.app.Application
 import android.content.Context
 import android.util.Log
+import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
 import androidx.work.ListenableWorker
 import androidx.work.WorkerFactory
@@ -16,22 +17,10 @@ import javax.inject.Inject
 class App : Application() , Configuration.Provider{
 
     @Inject
-    lateinit var myWorkerFactory: MyWorkerFactory
+    lateinit var myWorkerFactory: HiltWorkerFactory
 
     override fun getWorkManagerConfiguration(): Configuration =
         Configuration.Builder()
-            .setMinimumLoggingLevel(Log.DEBUG)
             .setWorkerFactory(myWorkerFactory)
             .build()
-}
-
-class MyWorkerFactory @Inject constructor(
-    private val saveAllDataUseCase: SaveAllDataUseCase
-) : WorkerFactory() {
-    override fun createWorker(
-        appContext: Context,
-        workerClassName: String,
-        workerParameters: WorkerParameters
-    ): ListenableWorker = ContactWorker(saveAllDataUseCase , appContext , workerParameters)
-
 }

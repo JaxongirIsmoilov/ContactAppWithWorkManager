@@ -17,6 +17,7 @@ interface HomeContract {
         data class ClickDeleteButton(val data: ContactParam):Intent
         data class ClickEditButton(val data: ContactParam):Intent
         object UpdateData :Intent
+        object ClickSetting : Intent
     }
 
 

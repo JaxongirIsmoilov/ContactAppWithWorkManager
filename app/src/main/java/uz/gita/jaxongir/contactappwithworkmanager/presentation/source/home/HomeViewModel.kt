@@ -54,6 +54,12 @@ class HomeViewModel @Inject constructor(
                 deleteUseCase.invoke(intent.data)
                 loadData()
             }
+
+            HomeContract.Intent.ClickSetting -> {
+                viewModelScope.launch {
+                    direction.moveToSettingScreen()
+                }
+            }
         }
     }
 

@@ -8,10 +8,10 @@ import uz.gita.jaxongir.contactappwithworkmanager.data.response.ContactResponse
 
 interface ContactApi {
 
-    @POST("/contact")
+    @POST("contact")
     fun addContact(contactRequest: ContactRequest) : Response<ContactResponse>
 
-    @GET("/contact")
+    @GET("contact")
     fun getAllContacts() : Response<List<ContactResponse>>
 
 }
