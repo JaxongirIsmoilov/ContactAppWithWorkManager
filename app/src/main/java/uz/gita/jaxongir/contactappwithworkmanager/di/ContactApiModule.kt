@@ -19,13 +19,13 @@ import javax.inject.Singleton
 class ContactApiModule {
 
     @[Provides Singleton]
-    fun provideClient(@ApplicationContext context : Context) : OkHttpClient =
+    fun provideClient(@ApplicationContext context: Context): OkHttpClient =
         OkHttpClient.Builder()
             .addInterceptor(ChuckerInterceptor.Builder(context).build())
             .build()
 
     @[Provides Singleton]
-    fun provideRetrofit(okHttp : OkHttpClient) : Retrofit =
+    fun provideRetrofit(okHttp: OkHttpClient): Retrofit =
         Retrofit.Builder()
             .client(okHttp)
             .addConverterFactory(GsonConverterFactory.create())
@@ -33,6 +33,6 @@ class ContactApiModule {
             .build()
 
     @[Provides Singleton]
-    fun contactApi(retrofit: Retrofit) : ContactApi = retrofit.create()
+    fun contactApi(retrofit: Retrofit): ContactApi = retrofit.create()
 
 }

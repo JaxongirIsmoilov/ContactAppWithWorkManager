@@ -37,7 +37,7 @@ class RepositoryImpl @Inject constructor(
 
     override fun saveAllData() {
         scope.launch {
-            dao.getAllContactData().forEach {
+            dao.getAllContactData().filter { !it.state }.forEach {
                 val response = contactApi.addContact(it.toContactRequest())
                 if (response.isSuccessful && response.body() != null) {
                     dao.update(
